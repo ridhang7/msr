@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>MSR</title>
+	
+</head>
+<script src="C:\Users\ridha\OneDrive\Desktop\New folder\Brython-3.10.6\brython.js"></script>
+<script src="C:\Users\ridha\OneDrive\Desktop\New folder\Brython-3.10.6\brython_stdlib.js"></script>
+
+<body onload="brython()">
+<script type="text/python">
+from browser import document,alert
+
+def show(e):
+	num_of_sim_users = int(input('Enter number of simultaneous user: '))
+	num_of_clicks_per_min = int(input('Enter approximate no of clicks per minute (If no input press zero 0) : '))
+	load_time=float(input('Enter load time in ms : '))
+	#use google analytics for rought idea
+	#take average load time from inspet website currently we are using 0.175 ms
+	#if user is not aware about the number of clicks per minute default number of clicks per minute is taken as 2
+
+	if (num_of_clicks_per_min == 0):
+		req_per_second = ((num_of_sim_users/60)/2)
+	else:
+		req_per_second = ((num_of_sim_users/60)/num_of_clicks_per_min)
+	num_of_vCPU = req_per_second*load_time
+	#handle case where core are in multiple of 2 4 8 16 32 64 etc. 
+	#give Ram output depending on the core selected
+	if(num_of_vCPU <=2):
+		alert("2 vCPU and 8GB ram required")
+	elif(num_of_vCPU >2 and num_of_vCPU<=4):
+		alert("4 vCPU and 16GB ram required")
+	elif(num_of_vCPU >4 and num_of_vCPU<=8):
+		alert("8 vCPU and 32GB ram required")
+	elif(num_of_vCPU >8 and num_of_vCPU<=16):
+		alert("16 vCPU and 64GB ram required")
+	elif(num_of_vCPU >16 and num_of_vCPU<=32):
+		alert("32 vCPU and 128GB ram required")
+	elif(num_of_vCPU >32 and num_of_vCPU<=64):
+		alert("64 vCPU and 256GB ram required")
+document['btn'].bind("click",show)
+
+document <= ""
+
+</script>
+	<button id="btn">Click to enter input</button>
+</body>
+</html>
